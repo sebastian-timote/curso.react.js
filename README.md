@@ -1,4 +1,6 @@
 # 🚀 Welcome to your new awesome project!
+
+es una clone de twitter 
 ```
 This project has been created using **webpack scaffold**, you can now run
 1. npm install //instalar todas las dependencias
