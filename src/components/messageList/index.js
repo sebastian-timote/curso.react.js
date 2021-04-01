@@ -9,18 +9,23 @@ class MessageList extends Component {
     render(){
         return(
         <div className={styles.root}>
-            {this.props.messages.map( (msg, index) => {
+            {this.props.messages.map( msg => {
                 return(
                     <Message 
                         text= {msg.text} 
-                        key={index} 
+                        key={msg.id} 
                         picture={msg.picture}
                         displayName={msg.displayName} 
                         userName={msg.userName}
                         date={msg.date}
+                        numRetweets ={msg.retweets}
+                        numFavorites ={msg.favorites}
+                        onRetweet={() => this.props.onRetweet(msg.id)}
+                        onFavorite={() => this.props.onFavorite(msg.id)}
+
                     ></Message>
                 )
-            })}
+            }).reverse()}
         </div>
         )
     }
