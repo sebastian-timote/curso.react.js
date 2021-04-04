@@ -13,6 +13,7 @@ class Main extends Component {
         this.state = {
             user: Object.assign({}, this.props.user, {retweets: [] },{favorites: [] }),
             openText: false,
+            userNameToReply: '',
             messages: [{
                 id: uuidv4(),
                 text: 'mensaje de twitter',
@@ -41,6 +42,7 @@ class Main extends Component {
         this.handleSendText = this.handleSendText.bind(this);
         this.handleRetweet = this.handleRetweet.bind(this);
         this.handleFavorite = this.handleFavorite.bind(this);
+        this.handleReplyTweet = this.handleReplyTweet.bind(this);
 
     }
     handleSendText(event){
@@ -57,7 +59,8 @@ class Main extends Component {
         }
         this.setState({
             messages: this.state.messages.concat(newMessage),//creamos un nuevo array pero no modificamos el que ya esta
-            openText: false
+            openText: false,
+            userNameToReply: ''
         })
         //console.log(this.state)
     }
@@ -73,7 +76,10 @@ class Main extends Component {
         if (this.state.openText) {
             return <InputText
                     onSendText={this.handleSendText}
-                    onCloseText={this.handleCloseText}/>
+                    onCloseText={this.handleCloseText}
+                    userNameToReply={this.state.userNameToReply}
+                    userReply = {this.state.userReply}
+                    />
         }
     }
     handleRetweet(msgId){
@@ -116,6 +122,12 @@ class Main extends Component {
         //console.log('nada1');return;
 
     }
+    handleReplyTweet(msgId, userNameToReply){
+        this.setState({
+            openText: true,
+            userNameToReply,
+        })
+    }
     render() {
         return(
             <div>
@@ -129,6 +141,8 @@ class Main extends Component {
                     messages={this.state.messages}
                     onRetweet={this.handleRetweet}
                     onFavorite={this.handleFavorite}
+                    onReplyTweet={this.handleReplyTweet}
+
                 ></MessageList>
             </div>
         )
