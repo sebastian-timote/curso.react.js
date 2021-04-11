@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Link } from 'react-router-dom';
 import styles from './profile-bar.css';
 
 
@@ -9,10 +10,12 @@ class ProfileBar extends Component {
     render() {
         return (
             <div className={styles.root}>
-                <figure>
-                    <img className={styles.avatar} src={this.props.picture}/>
-                </figure>
-                <span className={styles.userName}>hola @{this.props.userName}</span>
+                <Link to='/profile' >
+                    <figure>
+                        <img className={styles.avatar} src={this.props.picture}/>
+                    </figure>
+                </Link>
+                <span className={styles.userName}> @{this.props.userName}</span>
                 <button onClick={this.props.onOpenText} className={styles.button}>
                     <span className="fas fa-edit"> Tweet!</span>
                 </button>

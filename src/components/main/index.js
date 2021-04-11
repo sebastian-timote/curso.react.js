@@ -66,7 +66,10 @@ class Main extends Component {
     }
     handleCloseText(event){
         event.preventDefault();
-        this.setState({ openText: false})
+        this.setState({ 
+            openText: false,
+            userNameToReply: ''
+        })
     }
     handleOpenText(event){
         event.preventDefault();

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import styles from './message.css';
 import moment from 'moment';
 
@@ -29,13 +30,16 @@ class Message extends Component {
     }
 
     render(){
-        let dateFormat = moment(this.props.date).fromNow()
+        let dateFormat = moment(this.props.date).fromNow();
+        let userLink = `/user/${this.props.userName}/${this.props.displayName}`//<Link> se comporta como un elemento a href de html
         return(
         <div className={styles.root}>
             <div className={styles.user}>
-                <figure>
-                    <img className={styles.avatar} src={this.props.picture}></img>
-                </figure>
+                <Link to={userLink}>
+                    <figure>
+                        <img className={styles.avatar} src={this.props.picture}></img>
+                    </figure>
+                </Link>
                 <span className={styles.displayName}>{this.props.displayName}</span>
                 <span className={styles.userName}>{this.props.userName}</span>
                 <span className={styles.date}>{dateFormat}</span>
