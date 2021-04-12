@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {v4 as uuidv4} from 'uuid';
 
 import styles from './main.css';
@@ -6,6 +7,9 @@ import MessageList from '../messageList';
 import InputText from '../inputText/index';
 import ProfileBar from '../profilebar/index';
 
+const propTypes = {
+    user:PropTypes.object.isRequired
+}
 
 class Main extends Component {
     constructor(props){
@@ -81,7 +85,6 @@ class Main extends Component {
                     onSendText={this.handleSendText}
                     onCloseText={this.handleCloseText}
                     userNameToReply={this.state.userNameToReply}
-                    userReply = {this.state.userReply}
                     />
         }
     }
@@ -151,4 +154,5 @@ class Main extends Component {
         )
     }
 }
+Main.propTypes=propTypes;
 export default Main;

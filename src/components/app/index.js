@@ -17,13 +17,13 @@ class App extends Component {
     constructor() {
         super()
         this.state = {
-            // user: {
-            //     photoURL: "https://i.pinimg.com/originals/0e/5e/d3/0e5ed305f4d5a37eb08559dba929805b.jpg",
-            //     email: "stimotev11@gmail.com",
-            //     onOpenText: false,
-            //     displayName: 'sebastian timoteV',
-            //     location: 'cali, colombia'
-            // }
+            user: {
+                photoURL: "https://i.pinimg.com/originals/0e/5e/d3/0e5ed305f4d5a37eb08559dba929805b.jpg",
+                email: "stimotev11@gmail.com",
+                onOpenText: false,
+                displayName: 'sebastian timoteV',
+                location: 'cali, colombia'
+            }
         }
         this.handleOnAuth = this.handleOnAuth.bind(this);
     }
