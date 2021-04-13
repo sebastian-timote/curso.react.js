@@ -6,7 +6,7 @@ const propTypes = {
     onAuth:PropTypes.func.isRequired
 }
 
-function Login(onAuth) {
+function Login({onAuth}) {
     return (
         <div className={styles.root}>
             <p className={styles.text}>

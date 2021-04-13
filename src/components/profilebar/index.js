@@ -10,7 +10,7 @@ const propTypes = {
 }
 
 
-function ProfileBar({picture, userName, onOpenText}) {
+function ProfileBar({picture, userName, onOpenText, onLogout}) {
     return (
         <div className={styles.root}>
             <Link to='/profile' >
@@ -21,6 +21,9 @@ function ProfileBar({picture, userName, onOpenText}) {
             <span className={styles.userName}> @{userName}</span>
             <button onClick={onOpenText} className={styles.button}>
                 <span className="fas fa-edit"> Tweet!</span>
+            </button>
+            <button onClick={onLogout} className={styles.button}>
+                <span className="fas fa-sign-out-alt"> Salir</span>
             </button>
         </div>
     )

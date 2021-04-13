@@ -8,7 +8,8 @@ import InputText from '../inputText/index';
 import ProfileBar from '../profilebar/index';
 
 const propTypes = {
-    user:PropTypes.object.isRequired
+    user:PropTypes.object.isRequired,
+    onLogout: PropTypes.func.isRequired
 }
 
 class Main extends Component {
@@ -141,6 +142,7 @@ class Main extends Component {
                     picture={this.props.user.photoURL}
                     userName={this.props.user.email.split('@')[0]}
                     onOpenText={this.handleOpenText}//le decimos que no use el this de la clase si no this del componente propio
+                    onLogout={this.props.onLogout}
                 ></ProfileBar>
                 {this.renderOpenText()}
                 <MessageList 
