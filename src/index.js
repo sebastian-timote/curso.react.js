@@ -1,9 +1,10 @@
 //ejecutar serivdor de webpack con npx webpack serve
+//para ejecutar firebase login en consola se debe instalar npm i -g firebase-tools
+//npm run production -> minificar archivos
 import React from 'react';
 import { render } from 'react-dom';
 import firebase from 'firebase';
 import "./assets/style.css";
-import App from './components/app/index';
 // Initialize Firebase
 firebase.initializeApp({
     apiKey: "AIzaSyDOVhg5OiXcJZmR8kRYi88imge7AnmZqBE",
@@ -15,5 +16,6 @@ firebase.initializeApp({
     measurementId: "G-9JX8PT9868"
 });
 
+import App from './components/app/index';
 
 render( < App / > , document.getElementById('root'))

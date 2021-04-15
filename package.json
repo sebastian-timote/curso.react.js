@@ -4,6 +4,7 @@
   "description": "My webpack project",
   "main": "/build/app.js",
   "scripts": {
+    "production": "webpack --mode production",
     "build": "webpack",
     "serve": "webpack serve --content-base build/ --color --progress",
     "start": "npm run serve"

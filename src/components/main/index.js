@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import firebase from 'firebase';
 import {v4 as uuidv4} from 'uuid';
 
 import styles from './main.css';
@@ -19,27 +20,28 @@ class Main extends Component {
             user: Object.assign({}, this.props.user, {retweets: [] },{favorites: [] }),
             openText: false,
             userNameToReply: '',
-            messages: [{
-                id: uuidv4(),
-                text: 'mensaje de twitter',
-                picture: 'https://s.gravatar.com/avatar/14c0e7e6e017f6fcffd555cc45ebe1fd?s=80',
-                displayName: 'sebastian timote',
-                userName: 'timo0011',
-                date: Date.now()-180000,
-                retweets: 0,
-                favorites: 0
-            },
-            {
-                id: uuidv4(),
-                text: 'hijitos adivinen quien hp soy',
-                picture: 'https://s.gravatar.com/avatar/14c0e7e6e017f6fcffd555cc45ebe1fd?s=80',
-                displayName: 'alvaraco uribe',
-                userName: 'paraquito0011',
-                date: Date.now()-1800000,
-                retweets: 0,
-                favorites:0
+            messages: [
+            //     {
+            //     id: uuidv4(),
+            //     text: 'mensaje de twitter',
+            //     picture: 'https://s.gravatar.com/avatar/14c0e7e6e017f6fcffd555cc45ebe1fd?s=80',
+            //     displayName: 'sebastian timote',
+            //     userName: 'timo0011',
+            //     date: Date.now()-180000,
+            //     retweets: 0,
+            //     favorites: 0
+            // },
+            // {
+            //     id: uuidv4(),
+            //     text: 'hijitos adivinen quien hp soy',
+            //     picture: 'https://s.gravatar.com/avatar/14c0e7e6e017f6fcffd555cc45ebe1fd?s=80',
+            //     displayName: 'alvaraco uribe',
+            //     userName: 'paraquito0011',
+            //     date: Date.now()-1800000,
+            //     retweets: 0,
+            //     favorites:0
 
-            }
+            // }
         ]
         }
         this.handleCloseText = this.handleCloseText.bind(this);
@@ -49,6 +51,16 @@ class Main extends Component {
         this.handleFavorite = this.handleFavorite.bind(this);
         this.handleReplyTweet = this.handleReplyTweet.bind(this);
 
+    }
+    componentWillMount () {
+        const messageRef = firebase.database().ref().child('messages')//obtenemos referencia a base de datos 
+        messageRef.on('child_added', snapshot => {//cuando se anada un hijo se actualiza el estado 
+            this.setState({//reemplaza la linea 80
+                messages: this.state.messages.concat(snapshot.val()),
+                openText: false,
+                userNameToReply: ''
+            })
+        })
     }
     handleSendText(event){
         event.preventDefault();
@@ -62,11 +74,14 @@ class Main extends Component {
             favorites: 0,
             retweets: 0
         }
-        this.setState({
-            messages: this.state.messages.concat(newMessage),//creamos un nuevo array pero no modificamos el que ya esta
-            openText: false,
-            userNameToReply: ''
-        })
+        const messageRef = firebase.database().ref().child('messages');
+        const messageId = messageRef.push()
+        messageId.set(newMessage)
+        // this.setState({//esta funcion se elimina cuando implementamos database de firebase
+        //     messages: this.state.messages.concat(newMessage),//creamos un nuevo array pero no modificamos el que ya esta
+        //     openText: false,
+        //     userNameToReply: ''
+        // })
         //console.log(this.state)
     }
     handleCloseText(event){
